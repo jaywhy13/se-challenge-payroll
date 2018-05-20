@@ -1,0 +1,11 @@
+*.pyc
+tmp/
+/*.tar.gz
+lib/*
+static_root
+media_root
+local_settings.py
+*.sublime*
+Thumbs.db
+db.sqlite3
+docs/_build
