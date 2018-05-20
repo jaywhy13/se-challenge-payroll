@@ -1,0 +1,25 @@
+version: '2'
+services:
+    web:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        command: python manage.py runserver 0.0.0.0:8000
+        volumes:
+            - .:/code
+        ports:
+            -  "8000:8000"
+        links:
+            - redis
+            - db
+        depends_on:
+            - db
+            - redis
+    redis:
+        image: redis:latest
+    db:
+        image: postgres:latest
+        environment:
+            POSTGRES_USER: user
+            POSTGRES_PASSWORD: password
+            POSTGRES_DB: db
