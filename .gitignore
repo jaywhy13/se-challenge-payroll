@@ -9,3 +9,4 @@ local_settings.py
 Thumbs.db
 db.sqlite3
 docs/_build
+node_modules/
