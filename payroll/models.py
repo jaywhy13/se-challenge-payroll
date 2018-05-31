@@ -13,22 +13,35 @@ from importer import DateField, StringField, IntegerField, DecimalField
 
 
 class Partner(models.Model):
+    """ Details for a partner that we have a relationship with. Partners
+        have employees that need to be paid via our system.
+    """
 
     name = models.CharField(max_length=255)
     default_profile = models.OneToOneField(
         "PartnerProfile", related_name="+", blank=True, null=True)
 
+    def __str__(self):
+        return self.name
+
 
 class PartnerProfile(models.Model):
-
+    """ The partner profile abstracts various settings for a partner
+        working in a territory.
+    """
     name = models.CharField(max_length=255)
     partner = models.ForeignKey("Partner", related_name='profiles')
     date_format = models.CharField(max_length=255, choices=DATE_FORMATS)
     country = models.CharField(max_length=255, choices=COUNTRIES)
     pay_period = models.CharField(max_length=255, choices=PAY_PERIODS)
 
+    def __str__(self):
+        return self.name
+
 
 class EmployeeGroup(models.Model):
+    """ A group of employees sharing the same rate that they are paid at
+    """
 
     class Meta:
         unique_together = ['name', 'partner_profile']
@@ -38,6 +51,8 @@ class EmployeeGroup(models.Model):
     partner_profile = models.ForeignKey(
         "PartnerProfile", related_name="employee_groups")
 
+    def __str__(self):
+        return self.name
 
 class EmployeeTime(models.Model):
     """ A record of units of time that an employee has worked. The time
@@ -55,8 +70,15 @@ class EmployeeTime(models.Model):
         "EmployeeGroup", related_name="employee_time_records")
 
 
-class EmployeeTimesheet(models.Model):
+    def __str__(self):
+        return "{} - {} ({} {})".format(
+            self.start_date, self.end_date,
+            self.quantity, self.get_unit_display())
 
+
+class EmployeeTimesheet(models.Model):
+    """ A timesheet holds a record of several employee time records
+    """
     class Meta:
         unique_together = ['partner', 'key']
 
