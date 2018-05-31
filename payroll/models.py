@@ -40,13 +40,19 @@ class EmployeeGroup(models.Model):
 
 
 class EmployeeTime(models.Model):
-
+    """ A record of units of time that an employee has worked. The time
+        worked is generally tied to a timesheet.
+    """
     start_date = models.DateField()
     end_date = models.DateField()
     unit = models.CharField(max_length=255, choices=TIMESHEET_UNITS)
     quantity = models.DecimalField(max_digits=10, decimal_places=2)
     timesheet = models.ForeignKey(
-        "EmployeeTimesheet", blank=True, null=True, on_delete=models.CASCADE)
+        "EmployeeTimesheet", blank=True, null=True, on_delete=models.CASCADE,
+        related_name="employee_time_records")
+    employee_id = models.IntegerField()
+    employee_group = models.ForeignKey(
+        "EmployeeGroup", related_name="employee_time_records")
 
 
 class EmployeeTimesheet(models.Model):
