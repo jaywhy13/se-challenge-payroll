@@ -1,0 +1,16 @@
+{% extends "index.html" %}
+
+
+{% block body %}
+
+<h2>{{ partner }}</h2>
+
+<p>Select a profile to manage</p>
+
+<ul>
+  {% for profile in profiles %}
+    <li><a href="{% url 'partner-profile' partner=partner.pk profile=profile.pk %}">{{ profile.name }}</a></li>
+
+  {% endfor %}
+</ul>
+{% endblock body %}

@@ -1,0 +1,45 @@
+{% extends "index.html" %}
+
+
+{% load humanize %}
+
+{% block body %}
+<h2>{{ profile }} Profile</h2>
+
+<h3>Report</h3>
+
+{% if timesheet_report %}
+    <table>
+        <thead>
+            <th>Employee ID</th>
+            <th>Pay Period</th>
+            <th>Amount Paid</th>
+        </thead>
+
+        <tbody>
+            {% for row in timesheet_report %}
+                <tr>
+                    <td>{{ row.employee_id }}</td>
+                    <td>{{ row.start_of_period|date:"d/m/Y" }} - {{ row.end_of_period|date:"d/m/Y" }}</td>
+                    <td>{{ row.amount_paid|intcomma }}</td>
+                </tr>        
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% else %}
+No records to display.
+{% endif %}
+
+
+
+<h3>Upload</h3>
+
+<form enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" name="submit" value="Upload"> 
+</form>
+
+
+{% endblock body %}
