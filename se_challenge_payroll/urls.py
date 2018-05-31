@@ -18,13 +18,19 @@ from django.contrib import admin
 
 from rest_framework.routers import DefaultRouter
 
-from payroll.views import HomeView, PartnerViewSet
+from payroll.views import (
+    HomeView, PartnerViewSet, PartnerProfilesView,
+    PartnerProfileView,
+
+)
 
 router = DefaultRouter()
 router.register(r'partner', PartnerViewSet)
 
 urlpatterns = [
     url(r'^$', HomeView.as_view(), name='home'),
+    url(r'^partner-profiles/(?P<partner>\d+)/', PartnerProfilesView.as_view(), name='partner-profiles'),
+    url(r'^partner-profile/(?P<partner>\d+)/profile/(?P<profile>\d+)', PartnerProfileView.as_view(), name='partner-profile'),
     url(r'^admin/', admin.site.urls),
     # API
     url(r'^api/', include(router.urls)),
