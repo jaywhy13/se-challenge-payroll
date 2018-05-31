@@ -35,6 +35,22 @@
     ga('create', 'UA-XXXXX-Y', 'auto'); ga('send', 'pageview')
   </script>
   <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+  <div class="container-fluid">
+    <div class="row">
+      {% block body %}
+      <h2>Our  Partners</h2>
+
+      <ul>
+      {% for partner in partners %}
+        <li>
+          <a href="{% url 'partner-profiles' partner=partner.pk %}">{{ partner.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+      {% endblock body %}
+    </div>
+  </div>
+
 </body>
 
 </html>
