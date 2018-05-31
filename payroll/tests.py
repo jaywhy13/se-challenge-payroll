@@ -1,5 +1,11 @@
+from io import StringIO
+
 from django.test import TestCase
 
-from payroll.models import Partner
 
+class TestTimeSheetImport(TestCase):
 
+    def test_timesheet_import(self):
+        pass
+        # Get time sheet data
+        # Check the actual data, row by row
