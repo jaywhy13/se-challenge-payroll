@@ -3,6 +3,8 @@ DATE_FORMATS = (
     ("mm/dd/yyyy", "%m/%d/%Y"),
 )
 
+DEFAULT_DATE_FORMAT = "%d/%m/%Y"
+
 COUNTRIES = (
     ("Jamaica", "JA"),
     ("Canada", "CA"),
