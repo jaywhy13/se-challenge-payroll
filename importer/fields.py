@@ -99,6 +99,6 @@ class StringField(Field):
 
     def validate(self, data=None):
         super().validate(data=data)
-        if not isinstance(data, basestring):
+        if not isinstance(data, str):
             raise ValueError(
                 "{} is not a valid string".format(data))
