@@ -57,9 +57,9 @@ class Importer(object):
             if field_name not in self:
                 raise Exception(
                     "Invalid field found in data: {}".format(field_name))
-                field = self[field_name]
-                field_data = data.get(field_name)
-                field.validate(field_data)
+            field = self[field_name]
+            field_data = data.get(field_name)
+            field.validate(field_data)
         return True
 
     def is_valid(self):
