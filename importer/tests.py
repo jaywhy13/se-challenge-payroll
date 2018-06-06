@@ -28,20 +28,13 @@ class SimpleImporter(Importer):
 
 class TestImporterConfiguration(TestCase):
 
-    def test_importer_configuration(self):
-        configuration = self.get_importer_configuration()
-        importer = self.get_importer(
-            configuration=configuration)
-        print(">>>> This is the SimpleImporter: {}".format(importer))
-        self.assertIsNotNone(importer)
-        self.test_field_attributes(importer=importer)
-        self.test_field_validation(importer=importer)
-
-    def get_importer(self, configuration=None):
+    def get_importer(self, configuration=None, data=[]):
         """ Returns a SimpleImporter
         """
+        if not configuration:
+            configuration = self.get_importer_configuration()
         simple_importer = SimpleImporter(
-            configuration=configuration)
+            configuration=configuration, data=data)
         return simple_importer
 
     def get_importer_configuration(self):
@@ -57,11 +50,11 @@ class TestImporterConfiguration(TestCase):
         configuration = ImporterConfiguration(fields=fields)
         return configuration
 
-    def test_field_attributes(self, importer=None):
+    def test_field_attributes(self):
         """ Ensures that fields are properly registered on the Importer
             and also ensures common properties work.
         """
-        print("Test field attributes >>>> {}".format(importer))
+        importer = self.get_importer()
         field_names = [
             "date", "end_date", "hours_worked", "employee_id", "job_group"]
         for field_name in field_names:
@@ -74,9 +67,10 @@ class TestImporterConfiguration(TestCase):
             self.assertTrue(field.required)
         self.assertFalse(importer["end_date"].required)
 
-    def test_field_validation(self, importer=None):
+    def test_field_validation(self):
         """ Tests to ensure our fields validate data properly
         """
+        importer = self.get_importer()
         for data in self.get_invalid_test_data():
             with self.assertRaises(Exception):
                 importer.validate(data)
