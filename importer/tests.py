@@ -98,11 +98,9 @@ class TestImporterConfiguration(TestCase):
                  employee_id=1, job_group="A"),
             # Integer based errors using employee_id
             dict(date="01/01/2018", hours_worked=1,
-                 employee_id=1.3, job_group="A"),
+                 employee_id="2A", job_group="A"),
             dict(date="01/01/2018", hours_worked=1,
                  employee_id="abc", job_group="A"),
-            dict(date="01/01/2018", hours_worked=1,
-                 employee_id=1.3, job_group="A"),
         ]
 
     def get_valid_test_data(self):
