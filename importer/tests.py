@@ -105,11 +105,11 @@ class TestImporterConfiguration(TestCase):
 
     def get_valid_test_data(self):
         return [
-            dict(data="01/01/2018", hours_worked=1,
+            dict(date="01/01/2018", hours_worked=1,
                  employee_id=1, job_group="A"),
-            dict(data="01/01/2018", hours_worked=1.5,
+            dict(date="01/01/2018", hours_worked=1.5,
                  employee_id=1, job_group="A"),
-            dict(data="01/01/2018", end_date="10/01/2018", hours_worked=1,
+            dict(date="01/01/2018", end_date="10/01/2018", hours_worked=1,
                  employee_id=1, job_group="A"),
         ]
 
