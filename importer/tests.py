@@ -118,7 +118,7 @@ class TestCSVImporter(TestCase):
 
     def test_csv_importer(self):
         csv_importer = self.get_test_csv_importer()
-        csv_data = list(csv_importer.get_data())
+        csv_data = list(csv_importer)
         expected_data = self.get_expected_data()
         self.assertEquals(len(csv_data), len(expected_data))
         for i, row in enumerate(csv_data):
