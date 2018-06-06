@@ -8,7 +8,7 @@ from importer import (
     DateField, IntegerField, DecimalField, StringField
 )
 
-TEST_DATA_STRING = """"date,hours worked,employee id,job group
+TEST_DATA_STRING = """date,hours_worked,employee_id,job_group
 14/11/2016,7.5,1,A
 9/11/2016,4,2,B"""
 DATE_FORMAT = "%d/%m/%Y"
