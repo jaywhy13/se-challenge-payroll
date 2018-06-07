@@ -149,7 +149,7 @@ class EmployeeTimesheet(models.Model):
     def get_report_id_and_data_from_csv(cls, file=None):
         filedata = EmployeeTimesheet._get_csv_as_str(file)
         header_line, *lines, report_id_line = filedata.splitlines()
-        csv_data = StringIO("\n".join(map(str, lines)))
+        csv_data = StringIO("\n".join(map(str, [header_line] + lines)))
         configuration = \
             EmployeeTimesheet.get_csv_importer_configuration()
         importer = CSVImporter(configuration=configuration, file=csv_data)
